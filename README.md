@@ -2,7 +2,7 @@
 
 **See how much of your AI coding plans is left, and how hard your PC and servers are working, without opening anything.**
 
-[How to use](HOW-TO-USE.md) · [Download](#quick-start) · [Português (Brasil)](README.pt-BR.md)
+[How to use](HOW-TO-USE.md) · [Download](https://github.com/ntweb-design/nt-usage-tracker/releases/latest) · [Português (Brasil)](README.pt-BR.md)
 
 ![NT Usage Tracker: AI plan limits, this PC and a VPS, side by side, with a tooltip open](docs/screenshot-widget.png)
 
@@ -17,7 +17,7 @@ NT Usage Tracker is a small always-on-top widget for Windows. It shows the 5-hou
 
 ## Quick start
 
-1. Download and run `NT-Usage-Tracker-Setup-<version>.exe`. It installs for your user only. The installer is not signed, so SmartScreen asks once: **More info › Run anyway**.
+1. Download and run `NT-Usage-Tracker-Setup-<version>.exe` from the [latest release](https://github.com/ntweb-design/nt-usage-tracker/releases/latest). It installs for your user only. The installer is not signed, so SmartScreen asks once: **More info › Run anyway**.
 2. The widget appears on the right edge of the screen. Providers whose CLI is installed show up by themselves.
 3. Right-click a box for everything else: sign in to a CLI, add a VPS, change the language.
 

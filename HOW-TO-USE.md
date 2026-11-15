@@ -27,7 +27,7 @@ Everything about installing, reading and arranging the widget, connecting each p
 
 ## Install
 
-1. Download `NT-Usage-Tracker-Setup-<version>.exe` (or [build it yourself](#building-from-source)).
+1. Download `NT-Usage-Tracker-Setup-<version>.exe` from the [latest release](https://github.com/ntweb-design/nt-usage-tracker/releases/latest) (or [build it yourself](#building-from-source)).
 2. Run it. It installs for your Windows user only, without asking for administrator rights.
 3. The installer is not code-signed, so Windows SmartScreen warns on the first run: choose **More info › Run anyway**.
 

@@ -2,7 +2,7 @@
 
 **Veja quanto resta dos seus planos de IA para programação, e o quanto o seu PC e os seus servidores estão trabalhando, sem abrir nada.**
 
-[Como usar](HOW-TO-USE.pt-BR.md) · [Baixar](#início-rápido) · [English](README.md)
+[Como usar](HOW-TO-USE.pt-BR.md) · [Baixar](https://github.com/ntweb-design/nt-usage-tracker/releases/latest) · [English](README.md)
 
 ![NT Usage Tracker: limites dos planos de IA, este PC e uma VPS lado a lado, com um tooltip aberto](docs/screenshot-widget.png)
 
@@ -17,7 +17,7 @@ O NT Usage Tracker é um pequeno widget para Windows que fica sempre por cima da
 
 ## Início rápido
 
-1. Baixe e rode o `NT-Usage-Tracker-Setup-<versão>.exe`. Ele instala só para o seu usuário. O instalador não é assinado, então o SmartScreen pergunta uma vez: **Mais informações › Executar assim mesmo**.
+1. Baixe e rode o `NT-Usage-Tracker-Setup-<versão>.exe` da [última release](https://github.com/ntweb-design/nt-usage-tracker/releases/latest). Ele instala só para o seu usuário. O instalador não é assinado, então o SmartScreen pergunta uma vez: **Mais informações › Executar assim mesmo**.
 2. O widget aparece na borda direita da tela. Os providers cujo CLI está instalado aparecem sozinhos.
 3. O app abre em inglês. Para usar em português, clique com o botão direito numa box › **Language › Português (Brasil)**.
 4. O resto também fica no botão direito: entrar num CLI, adicionar uma VPS, trocar a grade de encaixe.

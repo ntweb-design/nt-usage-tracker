@@ -27,7 +27,7 @@ Tudo sobre instalar, ler e arrumar o widget, conectar cada provider e servidor, 
 
 ## Instalação
 
-1. Baixe o `NT-Usage-Tracker-Setup-<versão>.exe` (ou [compile você mesmo](#compilando-a-partir-do-código)).
+1. Baixe o `NT-Usage-Tracker-Setup-<versão>.exe` da [última release](https://github.com/ntweb-design/nt-usage-tracker/releases/latest) (ou [compile você mesmo](#compilando-a-partir-do-código)).
 2. Execute. Ele instala só para o seu usuário do Windows, sem pedir permissão de administrador.
 3. O instalador não é assinado, então o Windows SmartScreen avisa na primeira execução: escolha **Mais informações › Executar assim mesmo**.
 
