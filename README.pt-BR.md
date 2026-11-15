@@ -60,6 +60,12 @@ O [HOW-TO-USE.pt-BR.md](HOW-TO-USE.pt-BR.md) tem o guia completo:
 - problemas comuns;
 - como compilar a partir do código.
 
+## Sobre este projeto
+
+O NT Usage Tracker começou como uma ferramenta pessoal, feita em volta das IAs que eu uso no dia a dia. Por isso ele cobre esses providers e não outros, e por enquanto só funciona no Windows. Estou compartilhando do jeito que está, caso seja útil para mais alguém.
+
+**Contribuições são bem-vindas.** Abra uma issue ou um pull request com uma correção, uma funcionalidade nova ou o suporte a outro provider de IA (cada provider é um arquivo pequeno em `src/collect/`). Eu leio e reviso todos.
+
 ## Licença
 
 [MIT](LICENSE).

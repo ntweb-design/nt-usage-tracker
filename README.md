@@ -59,6 +59,12 @@ npm run dist   # installer in dist/
 - troubleshooting;
 - building from source.
 
+## About this project
+
+NT Usage Tracker started as a personal tool, built around the AI tools I use every day. That is why it covers these providers and not others, and why it is Windows only for now. I am sharing it as it is, in case it is useful to someone else.
+
+**Contributions are welcome.** Open an issue or a pull request for a bug fix, a new feature, or support for another AI provider (each provider is one small file in `src/collect/`). I read and review every one.
+
 ## License
 
 [MIT](LICENSE).
