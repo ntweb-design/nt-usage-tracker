@@ -1,0 +1,37 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+const on = (channel) => (cb) => ipcRenderer.on(channel, (_e, data) => cb(data));
+
+contextBridge.exposeInMainWorld('tracker', {
+  onSnapshot: on('snapshot'),
+  onLayout: on('layout'),
+  onDragging: on('dragging'),
+  onTip: on('tip'),
+  onReport: on('report'),
+  onSys: on('sys'),
+  onTheme: on('theme'),
+  onTrayState: on('tray-state'),
+  trayState: () => ipcRenderer.invoke('tray-state'),
+  trayAction: (action) => ipcRenderer.send('tray-action', action),
+  traySize: (size) => ipcRenderer.send('tray-size', size),
+  getSnapshot: () => ipcRenderer.invoke('get-snapshot'),
+  getSys: () => ipcRenderer.invoke('get-sys'),
+  dragStart: () => ipcRenderer.send('drag-start'),
+  dragEnd: () => ipcRenderer.send('drag-end'),
+  hover: (id, rect) => ipcRenderer.send('hover', { id, rect }),
+  tipSize: (size) => ipcRenderer.send('tip-size', size),
+  openReport: (id) => ipcRenderer.send('open-report', id),
+  contextMenu: () => ipcRenderer.send('context-menu'),
+  refresh: () => ipcRenderer.send('refresh'),
+  connect: (id) => ipcRenderer.send('connect', id),
+  apiKeyState: () => ipcRenderer.invoke('apikey-state'),
+  apiKeySave: (data) => ipcRenderer.invoke('apikey-save', data),
+  vpsGet: (id) => ipcRenderer.invoke('vps-get', id),
+  vpsPickKey: () => ipcRenderer.invoke('vps-pick-key'),
+  vpsGenKey: (data) => ipcRenderer.invoke('vps-gen-key', data),
+  vpsTest: (data) => ipcRenderer.invoke('vps-test', data),
+  vpsSave: (data) => ipcRenderer.invoke('vps-save', data),
+  nameGet: (box) => ipcRenderer.invoke('name-get', box),
+  nameSave: (data) => ipcRenderer.invoke('name-save', data),
+  copyText: (text) => ipcRenderer.invoke('copy-text', text),
+});

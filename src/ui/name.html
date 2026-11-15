@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<title>Box name</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  body { background: var(--surface); padding: 16px 20px; margin: 0; }
+  label { display: block; color: var(--ink-3); margin: 0 0 6px; }
+  input {
+    width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); background: var(--panel);
+    border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; margin: 0 0 14px;
+  }
+  .row { display: flex; gap: 8px; justify-content: flex-end; }
+  button { font: inherit; color: var(--ink-2); background: none; border: 1px solid var(--line); border-radius: 7px; padding: 6px 12px; cursor: pointer; }
+  button:hover { color: var(--ink); background: var(--hover); }
+  button.primary { color: #fff; background: #3987e5; border-color: #3987e5; }
+  button.primary:hover { background: #2a78d6; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #3987e5; outline-offset: 1px; }
+</style>
+</head>
+<body>
+  <label for="name" data-t>Name shown above the meters</label>
+  <input id="name" maxlength="40" spellcheck="false">
+  <div class="row"><button id="cancel" data-t>Cancel</button><button id="save" class="primary" data-t>Save</button></div>
+<script src="../i18n.js"></script>
+<script src="common.js"></script>
+<script src="name.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<link rel="stylesheet" href="common.css">
+<style>
+  html, body { background: transparent; overflow: hidden; }
+  #menu {
+    position: absolute; top: 0; left: 0; width: 264px;
+    padding: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--box-border);
+    border-radius: 12px;
+  }
+  .about { display: flex; align-items: baseline; gap: 8px; padding: 8px 10px 10px; }
+  .about b { font-size: 14px; font-weight: 600; }
+  .about span { color: var(--ink-3); }
+  .sep { height: 1px; background: var(--line); margin: 6px 4px; }
+  button.row, .row {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    font: inherit; color: var(--ink); background: none; border: 0; border-radius: 7px;
+    padding: 8px 10px; text-align: left;
+  }
+  button.row { cursor: pointer; }
+  button.row:hover { background: var(--hover); }
+  button:focus-visible, input:focus-visible { outline: 2px solid #3987e5; outline-offset: 1px; }
+  .row .value { margin-left: auto; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .slider { flex-direction: column; align-items: stretch; gap: 6px; }
+  .slider label { display: flex; }
+  input[type="range"] { width: 100%; margin: 0; accent-color: #3987e5; cursor: pointer; }
+
+  /* Light/dark switch */
+  .switch { margin-left: auto; position: relative; width: 34px; height: 20px; border-radius: 10px; background: var(--track); transition: background 0.15s; }
+  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); transition: transform 0.15s; }
+  [aria-checked="true"] .switch { background: #3987e5; }
+  [aria-checked="true"] .switch::after { transform: translateX(14px); background: #fff; }
+</style>
+</head>
+<body>
+<div id="menu">
+  <div class="about"><b>NT Usage Tracker</b><span id="version"></span></div>
+  <button class="row" id="report" data-t>Usage report</button>
+  <button class="row" id="toggle">Hide widget</button>
+  <div class="sep"></div>
+  <div class="row slider">
+    <label for="opacity"><span data-t>Transparency</span><span class="value" id="opacity-value"></span></label>
+    <input type="range" id="opacity" min="0" max="80" step="1">
+  </div>
+  <button class="row" id="theme" role="switch" aria-checked="false"><span data-t>Light mode</span><span class="switch"></span></button>
+  <button class="row" id="lang"><span data-t>Language</span><span class="value" id="lang-value"></span></button>
+  <div class="sep"></div>
+  <button class="row" id="about"><span data-t>About…</span><span class="value">GitHub</span></button>
+  <button class="row" id="quit" data-t>Close</button>
+</div>
+<script src="../i18n.js"></script>
+<script src="common.js"></script>
+<script src="tray.js"></script>
+</body>
+</html>

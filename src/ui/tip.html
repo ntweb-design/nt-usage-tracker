@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<link rel="stylesheet" href="common.css">
+<style>
+  html, body { background: transparent; overflow: hidden; }
+  #card {
+    position: absolute; top: 0; left: 0;
+    width: 300px;
+    padding: 12px 14px 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--box-border);
+    border-radius: 12px;
+    --label-w: 112px;
+  }
+  .head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .head b { font-size: 14px; font-weight: 600; }
+  .head .plan { margin-left: auto; color: var(--ink-3); }
+  .note { color: var(--ink-3); line-height: 1.35; margin-top: 6px; white-space: normal; }
+  .note.alert { color: var(--ink-2); }
+  .today {
+    display: flex; justify-content: space-between; gap: 12px;
+    margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--line); color: var(--ink-3);
+  }
+  .today b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div id="card"></div>
+<script src="../i18n.js"></script>
+<script src="common.js"></script>
+<script src="tip.js"></script>
+</body>
+</html>

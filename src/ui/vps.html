@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<title>VPS</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  html, body { height: 100%; }
+  body { background: var(--surface); padding: 16px 20px; margin: 0; box-sizing: border-box; overflow-y: auto; -webkit-user-select: text; user-select: text; }
+  h1 { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  p { color: var(--ink-2); line-height: 1.45; margin: 0 0 12px; }
+  .hint { color: var(--ink-3); font-size: 12px; margin: -8px 0 12px; line-height: 1.4; }
+  label { display: block; color: var(--ink-3); margin: 0 0 5px; }
+  input, textarea, select {
+    width: 100%; box-sizing: border-box; font: inherit; color: var(--ink); background: var(--panel);
+    border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; margin: 0 0 12px;
+  }
+  textarea { font-family: Consolas, "Cascadia Mono", monospace; font-size: 11.5px; resize: vertical; min-height: 64px; }
+  .cols { display: flex; gap: 10px; }
+  .cols > div { flex: 1; }
+  .cols > div.small { flex: 0 0 90px; }
+  .row { display: flex; gap: 8px; align-items: center; }
+  .row .spacer { flex: 1; }
+  button {
+    font: inherit; color: var(--ink-2); background: none; border: 1px solid var(--line);
+    border-radius: 7px; padding: 6px 12px; cursor: pointer; white-space: nowrap;
+  }
+  button:hover { color: var(--ink); background: var(--hover); }
+  button:disabled { opacity: 0.5; cursor: default; }
+  button.primary { color: #fff; background: #3987e5; border-color: #3987e5; }
+  button.primary:hover { background: #2a78d6; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid #3987e5; outline-offset: 1px; }
+  .keypart { margin: 0 0 12px; }
+  .keypart[hidden], #pubBox[hidden] { display: none; }
+  .file { flex: 1; min-width: 0; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+  #pubBox { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 0 0 12px; background: var(--panel); }
+  #pubBox p { font-size: 12px; margin: 0 0 8px; }
+  #pubBox textarea { margin-bottom: 8px; background: var(--surface); }
+  #status { min-height: 18px; color: var(--ink-3); margin: 0 0 10px; line-height: 1.4; }
+  #status.bad { color: #e5484d; }
+  #status.good { color: #2fc26b; }
+  code { white-space: nowrap; }
+</style>
+</head>
+<body>
+  <h1 id="title" data-t>Add VPS</h1>
+  <p data-t>The connection uses SSH, with Windows' own SSH client: hosts from your <code>~/.ssh/config</code>, ssh-agent and Tailscale names all work. Nothing is installed on the VPS, and it does not need root.</p>
+
+  <label for="name" data-t>Name on the box</label>
+  <input id="name" maxlength="40" placeholder="e.g. web-server" data-tp>
+
+  <div class="cols">
+    <div>
+      <label for="host" data-t>Host</label>
+      <input id="host" list="hosts" spellcheck="false" autocomplete="off" placeholder="IP, Tailscale name or a Host from the config" data-tp>
+      <datalist id="hosts"></datalist>
+    </div>
+    <div class="small">
+      <label for="port" data-t>Port</label>
+      <input id="port" type="number" min="1" max="65535" placeholder="22">
+    </div>
+  </div>
+  <label for="user" data-t>User</label>
+  <input id="user" spellcheck="false" autocomplete="off" placeholder="empty = the one in ~/.ssh/config or your Windows user" data-tp>
+
+  <label for="keyMode" data-t>Key</label>
+  <select id="keyMode">
+    <option value="default" data-t>SSH default (~/.ssh, ssh-agent, Tailscale SSH)</option>
+    <option value="file" data-t>Private key file…</option>
+    <option value="paste" data-t>Paste a private key</option>
+    <option value="generated" data-t>Generate a new key in the app</option>
+  </select>
+
+  <div class="keypart" data-mode="file" hidden>
+    <div class="row"><button id="pick" data-t>Choose file…</button><span class="file" id="fileName" data-t>none</span></div>
+  </div>
+  <div class="keypart" data-mode="paste" hidden>
+    <textarea id="keyText" rows="5" spellcheck="false" placeholder="-----BEGIN OPENSSH PRIVATE KEY-----&#10;…&#10;-----END OPENSSH PRIVATE KEY-----"></textarea>
+    <div class="hint" data-t>This is the <b>private</b> key (no .pub). It is saved only on this machine, in the app's data folder. The .pub goes on the VPS.</div>
+  </div>
+  <div class="keypart" data-mode="generated" hidden>
+    <div class="row"><button id="gen" data-t>Generate key pair</button><span class="file" id="genName" data-t>ed25519, no passphrase, kept in the data folder</span></div>
+  </div>
+
+  <div id="pubBox" hidden>
+    <p data-t><b>Public key:</b> put it on the VPS, in <code>~/.ssh/authorized_keys</code> of the user above. Run the copied command in the provider's console or in an SSH session that already works:</p>
+    <textarea id="pub" rows="3" readonly spellcheck="false"></textarea>
+    <div class="row"><button id="copyCmd" data-t>Copy command</button><button id="copyPub" data-t>Copy the key only</button></div>
+  </div>
+
+  <div id="status"></div>
+  <div class="row">
+    <button id="test" data-t>Test connection</button>
+    <span class="spacer"></span>
+    <button id="cancel" data-t>Cancel</button>
+    <button id="save" class="primary" data-t>Save</button>
+  </div>
+<script src="../i18n.js"></script>
+<script src="common.js"></script>
+<script src="vps.js"></script>
+</body>
+</html>

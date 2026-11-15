@@ -1,0 +1,64 @@
+{
+  "name": "nt-usage-tracker",
+  "productName": "NT Usage Tracker",
+  "version": "0.1.0",
+  "description": "Windows desktop widget that shows how much is left of your AI coding plans, and the load of your PC and servers",
+  "author": "NTWeb",
+  "license": "MIT",
+  "homepage": "https://github.com/ntweb-design/nt-usage-tracker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ntweb-design/nt-usage-tracker.git"
+  },
+  "main": "src/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "collect": "node src/collect/index.js",
+    "icon": "node scripts/make-icon.js",
+    "dist": "node scripts/make-icon.js && electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.18.0"
+  },
+  "build": {
+    "appId": "com.nt.usagetracker",
+    "productName": "NT Usage Tracker",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "!src/devshots.js",
+      "!src/devdrag.js",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "src/sysmon.ps1",
+      "src/collect/**",
+      "src/i18n.js",
+      "node_modules/**"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "artifactName": "NT-Usage-Tracker-Setup-${version}.${ext}",
+      "shortcutName": "NT Usage Tracker"
+    }
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0"
+  }
+}

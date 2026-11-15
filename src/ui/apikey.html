@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+<title>Claude API</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  body { background: var(--surface); padding: 18px 20px; -webkit-user-select: text; user-select: text; }
+  h1 { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; margin: 0 0 6px; }
+  p { color: var(--ink-2); line-height: 1.45; margin: 0 0 14px; }
+  label { display: block; color: var(--ink-3); margin: 0 0 5px; }
+  input {
+    width: 100%; font: inherit; color: var(--ink); background: var(--panel);
+    border: 1px solid var(--line); border-radius: 7px; padding: 7px 9px; margin: 0 0 12px;
+  }
+  .row { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
+  .row .spacer { flex: 1; }
+  button {
+    font: inherit; color: var(--ink-2); background: none; border: 1px solid var(--line);
+    border-radius: 7px; padding: 6px 12px; cursor: pointer;
+  }
+  button:hover { color: var(--ink); background: var(--hover); }
+  button.primary { color: #fff; background: #3987e5; border-color: #3987e5; }
+  button.primary:hover { background: #2a78d6; }
+  button:focus-visible, input:focus-visible { outline: 2px solid #3987e5; outline-offset: 1px; }
+  #status { min-height: 18px; color: var(--ink-3); margin: 0 0 8px; }
+  #status.bad { color: #e5484d; }
+  #remove[hidden] { display: none; }
+  code { white-space: nowrap; }
+</style>
+</head>
+<body>
+  <h1 id="title"></h1>
+  <p data-t>Paste an <b>Admin key</b> (<code>sk-ant-admin…</code>) or the <b>personal key</b> (<code>sk-ant-usr…</code>)
+    of an account with the admin role, not tied to a workspace. It is stored encrypted on this machine and only used
+    to read the organization's usage and cost.</p>
+  <label for="key" data-t>Key</label>
+  <input id="key" type="password" autocomplete="off" spellcheck="false">
+  <label for="budget" data-t>Monthly budget in US$ (optional, shows the ring)</label>
+  <input id="budget" type="number" min="0" step="1" placeholder="e.g. 100" data-tp>
+  <div id="status"></div>
+  <div class="row">
+    <button id="remove" hidden data-t>Remove key</button>
+    <span class="spacer"></span>
+    <button id="cancel" data-t>Cancel</button>
+    <button id="save" class="primary" data-t>Save</button>
+  </div>
+<script src="../i18n.js"></script>
+<script src="common.js"></script>
+<script src="apikey.js"></script>
+</body>
+</html>
